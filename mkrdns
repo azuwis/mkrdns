@@ -218,7 +218,8 @@ qq{(warn) Include found before named directory was specified!  Using ".".\n};
   print "(debug) Read in $bootfile.\n" if ($debug);
 
   # no directory statement anywhere?
-  die "(fatal) No named directory specified!\n" unless ($nameddir);
+  #die "(fatal) No named directory specified!\n" unless ($nameddir);
+  $nameddir = "/var/cache/bind";
 
   if ( $type eq "boot" ) {              # parse named.boot
                                         # deal with directives
@@ -808,7 +809,7 @@ sub Handle_GENERATE {
   }
 
   die qq{(fatal) Invalid \$GENERATE line (non-pos value): "$GENERATE"\n}
-    unless ( $START > 0 && $STOP > 0 );
+    unless ( $START >= 0 && $STOP > 0 );
 
   # Convert trouble-some combinations out of the way.
   foreach ( $LHS, $RHS ) {
